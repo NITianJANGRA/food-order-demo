@@ -13,11 +13,8 @@ const NavBar = () => {
     <nav>
         <Link to="/" > <img className='logo' src="/images/logo.png" alt="LOGO"  /> </Link>
         <div className="cart-link">
-          {/* <Link to="/" > Home </Link> */}
           <Link to="/cart" > <AiOutlineShoppingCart /> <span className='order-count'>{count}</span></Link>
         </div>
-        {/* <a >LOGO</a> */}
-        {/* <a href="/cart">CART</a> */}
     </nav>
   )
 }

@@ -3,7 +3,6 @@ import { useStore } from '../../store/context';
 import TextButton from '../buttons/TextButton';
 import "./style.css";
 const SingleItemCard = ({itemId}) => {
-    console.log(itemId);
     const {state:{products},ACTIONS} = useStore()
     const item = products[itemId]
     const handleAddItemToCart = () => {
