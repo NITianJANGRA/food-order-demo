@@ -11,11 +11,11 @@ root.render(
     React.StrictMode make render component twice. 
     It only happens in development mode.
   */ 
-  // <React.StrictMode>
+  <React.StrictMode>
     <Context>
       <App /> 
     </Context>
-  // </React.StrictMode>
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
