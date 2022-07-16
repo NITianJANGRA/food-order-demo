@@ -22,7 +22,7 @@ const CartTotal = () => {
                 const product = products[order.itemId]
                 const currentTotalAmount = product.price * order.orderQuantity
                 totalAmount += currentTotalAmount
-                return <AmountDetail itemName={product?.name} amount={currentTotalAmount} />                    
+                return <AmountDetail key={order.itemId} itemName={product?.name} amount={currentTotalAmount} />                    
             })}
         </div>
         <hr />

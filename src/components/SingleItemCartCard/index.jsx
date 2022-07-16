@@ -6,7 +6,7 @@ import "./style.css"
 
 const SingleItemCartCard = ({order}) => {
     const {state:{products}, ACTIONS} = useStore()
-    const item = products[order.itemId]
+    const item = products[order?.itemId]
     const handleAddItemToCart = () => {
         ACTIONS.addItemToCart(order.itemId)
     }

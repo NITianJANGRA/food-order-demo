@@ -16,3 +16,10 @@
 .final-amount {
     font-weight: 700;
 }
+
+@media only screen and (max-width: 850px) {
+    .bill-container{
+        position: relative;
+        width: max(20em, 50vw);
+    }
+}
