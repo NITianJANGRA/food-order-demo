@@ -1,0 +1,11 @@
+.text-btn{
+    text-decoration: none;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+}
+
+.text-btn:hover{
+    text-decoration: underline;
+    font-weight: bold;
+}
