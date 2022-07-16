@@ -1,0 +1,47 @@
+.order-container{
+    text-align: center;
+    /* border: .05em solid black; */
+    border-radius: 1em;
+    width: 30em;
+    margin: 2em auto;
+    background-color: var(--white);
+}
+
+.order-card{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.order-img-container{
+    flex: 1;
+}
+
+.order-image{
+    width: 100%;
+}
+
+.order-body{
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: baseline;
+    text-align: start;
+}
+
+.order-body-footer{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+}
+.hr-divider{
+    width: 80%;
+    margin: 5px 0;
+}
+
+.final-price{
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+}
