@@ -4,7 +4,7 @@ import { cartReducer, initialState } from "./reducer";
 
 const Store = createContext()
 
-// HOC to inject data to App
+// HOC to inject data to App.
 const Context = ({children})=>{
     const [state, dispatch] = useReducer(cartReducer, initialState)
     const ACTIONS = getActions(dispatch);
@@ -16,7 +16,7 @@ const Context = ({children})=>{
 
 }
 
-// Custom hook wrapped around useContext to access store
+// Custom hook wrapped around useContext to access store.
 export const useStore = () =>{
     return useContext(Store)
 } 
