@@ -1,0 +1,16 @@
+.message-card {
+    text-align: center;
+}
+  
+h3 {
+    font-size: 2em;
+    margin: 0;
+    padding: 0;
+    font-weight: 600;
+}
+.link-to {
+    color: rgba(0,0,0,0.5);
+    font-size: 1em;
+    line-height: 1.5em;
+    margin: 1.25em auto 0 auto;
+}

@@ -1,0 +1,9 @@
+.full-width-btn{
+    width: 100%;
+    height: 3em;
+    font-size: 1em;
+    font-weight: 900;
+    background-color: #13b67f;
+    color: var(--white);
+    border-radius: 0.25em;
+}

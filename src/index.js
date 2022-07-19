@@ -3,11 +3,18 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Context from './store/context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  /*
+    React.StrictMode make render component twice. 
+    It only happens in development mode.
+  */ 
   <React.StrictMode>
-    <App />
+    <Context>
+      <App /> 
+    </Context>
   </React.StrictMode>
 );
 
