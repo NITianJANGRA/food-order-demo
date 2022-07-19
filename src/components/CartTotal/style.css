@@ -16,7 +16,11 @@
 .final-amount {
     font-weight: 700;
 }
-
+.order-now{
+    position: absolute;
+    width: 100%;
+    bottom: -4em;
+}
 @media only screen and (max-width: 850px) {
     .bill-container{
         position: relative;

@@ -1,13 +1,20 @@
 import React from 'react'
 import { useStore } from '../../store/context';
 import TextButton from '../buttons/TextButton';
+import CounterButton from '../buttons/CounterButton';
 import "./style.css";
 const SingleItemCard = ({itemId}) => {
-    const {state:{products},ACTIONS} = useStore()
+    const {state:{products, cart},ACTIONS} = useStore()
     const item = products[itemId]
+    const itemInCart = cart.find((order)=> order?.itemId === itemId)
+
     const handleAddItemToCart = () => {
         ACTIONS.addItemToCart(itemId)
     }
+    const handleRemoveItemFromCart = () => {
+        ACTIONS.removeItemFromCart(itemId)
+    }
+
   return (
     item ?
         <div className='card-container'>
@@ -26,7 +33,12 @@ const SingleItemCard = ({itemId}) => {
                 </div>
                 <div className="card-footer">
                     <h5 className="card-price"> &#8377; {item.price} </h5>
-                    <TextButton type='button' classes={["card-button"]} text="+ Add to Cart" onButtonClick={handleAddItemToCart}  />
+                    {
+                        itemInCart ? 
+                        <CounterButton value={itemInCart.orderQuantity} handleIncrement={handleAddItemToCart} handleDecrement={handleRemoveItemFromCart} />
+                        : <TextButton type='button' classes={["card-button"]} text="+ Add to Cart" onButtonClick={handleAddItemToCart}  />
+                        
+                    }
                 </div>
             </div>
         </div> : null

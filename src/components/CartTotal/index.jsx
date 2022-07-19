@@ -1,5 +1,8 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useStore } from '../../store/context'
+import { orderNow } from '../../store/helper'
+import FullWidthButton from '../buttons/FullWidthButton'
 
 import "./style.css"
 
@@ -13,8 +16,26 @@ const AmountDetail = ({itemName, amount}) => {
 }
 
 const CartTotal = () => {
-    const {state:{products,cart}} =useStore()
+    const {state:{products,cart}, ACTIONS} =useStore()
     let totalAmount = 0
+    const navigate = useNavigate();
+    const handleOrderNowClick = async()=>{
+        ACTIONS.setLoader()
+        try{
+            const status = await orderNow()
+            if(status){
+                ACTIONS.orderPlaced()
+                navigate("/orderSuccess")
+            }else{
+                navigate("/orderError")
+            }
+        }catch(err){
+            console.error(err)
+            navigate("/orderError")
+        }
+        ACTIONS.unsetLoader()
+    }
+
   return (
     <div className='bill-container'>
         <div className="order-amount">
@@ -28,6 +49,9 @@ const CartTotal = () => {
         <hr />
         <div className="final-amount">
             <AmountDetail itemName={'Total Amount : '} amount={totalAmount} />
+        </div>
+        <div className='order-now'>
+            <FullWidthButton text={`Order Now`} onButtonClick={handleOrderNowClick} />
         </div>
     </div>
   )

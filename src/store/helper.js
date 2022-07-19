@@ -121,3 +121,14 @@ export const menuItemsData = {
             img: '/images/pizza.png',
         },
 };
+
+
+export const fetchData = () => new Promise( (resolve)=> setTimeout(()=>resolve(menuItemsData), 800)    )
+export const orderNow = () => new Promise( (resolve,reject)=> setTimeout(()=>{
+    const rand = Math.floor(Math.random() * 10)
+    if(rand<=5){
+        resolve(true)
+    }else{
+        reject(false)
+    }
+}, 500)    )
