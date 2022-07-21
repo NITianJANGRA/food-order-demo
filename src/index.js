@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Context from './store/context';
+
+import { Provider } from 'react-redux';
+import { store } from './pages/restaurant/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -12,9 +14,9 @@ root.render(
     It only happens in development mode.
   */ 
   <React.StrictMode>
-    <Context>
+    <Provider store={store}>
       <App /> 
-    </Context>
+    </Provider>
   </React.StrictMode>
 );
 
