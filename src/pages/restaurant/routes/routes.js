@@ -1,11 +1,11 @@
 import MessageCard from "../components/MessageCard"
 import CartPage from "../CartPage"
-import HomePage from "../HomePage"
+import HomePageContainer from "../HomePage"
 
 export const ROUTES = [
     {
         path : "/",
-        component : <HomePage />,
+        component : <HomePageContainer />,
         exact : true
     },
     {
