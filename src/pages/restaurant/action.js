@@ -6,61 +6,75 @@ import { UPDATE_PRODUCT_LIST } from "./reducers/products.reducer"
 
 // created an abstract layer over functionality to update Store
 
-export const useActions = () => {
-    const dispatch = useDispatch()
-    const addItemToCart = (itemId)=>{
-        dispatch({
-            type: ADD_TO_CART,
-            payload: {
+export const addItemToCartAction = (itemId)=>{
+    return {
+        type: ADD_TO_CART,
+        payload: {
+            itemId
+        }
+    }
+}
+
+export const removeItemFromCartAction = (itemId) => {
+    return {
+            type: REMOVE_FROM_CART,
+            payload:{
                 itemId
             }
-        })
+        }
+}
+
+export const setLoaderAction = ()=>{
+    return{
+            type: SET_LOADER
+        }
+}
+
+export const unsetLoaderAction = ()=>{
+    return{
+            type: UNSET_LOADER
+        }
+}
+
+export const updateProductListAction = (data)=>{
+    return{
+            type: UPDATE_PRODUCT_LIST,
+            payload: data
+        }
+}
+
+export const orderPlacedAction = ()=>{
+    return{
+            type: ORDER_PLACED
+        }
+}
+
+export const useActions = () => {
+    const dispatch = useDispatch()
+    
+    const addItemToCart = (itemId)=>{
+        dispatch(addItemToCartAction(itemId))
     }
 
     const removeItemFromCart = (itemId) => {
-        dispatch(
-            {
-                type: REMOVE_FROM_CART,
-                payload:{
-                    itemId
-                }
-            }
-        )
+        dispatch(removeItemFromCartAction(itemId))
     }
 
     const setLoader = ()=>{
-        dispatch(
-            {
-                type: SET_LOADER
-            }
-        )
+        dispatch(setLoaderAction())
     }
 
     const unsetLoader = ()=>{
-        dispatch(
-            {
-                type: UNSET_LOADER
-            }
-        )
+        dispatch(unsetLoaderAction())
     }
 
     const updateProductList = (data)=>{
-        dispatch(
-            {
-                type: UPDATE_PRODUCT_LIST,
-                payload: data
-            }
-        )
+        dispatch(updateProductListAction(data))
     }
 
     const orderPlaced = ()=>{
-        dispatch(
-            {
-                type: ORDER_PLACED
-            }
-        )
+        dispatch(orderPlacedAction())
     }
-
     return {
         setLoader,
         unsetLoader,

@@ -1,39 +1,58 @@
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
+import { connect } from 'react-redux';
 
-import { useActions } from '../action';
+import { setLoaderAction, unsetLoaderAction, updateProductListAction } from '../action';
 import LoaderHOC from '../components/Loader';
 import SingleItemCard from '../components/singleItemCard';
 import { fetchData } from '../reducers/helper';
-import { Products } from '../reducers/selectors/products.selector';
 
 import "./style.css";
 
-const HomePage = () => {
-  const products = useSelector(Products)
-  const ACTIONS = useActions()
+class HomePage extends React.Component {
 
-  useEffect(()=>{
-    // IIFE
-    (async ()=>{
-      ACTIONS.setLoader()
-      if(Object.keys(products).length <= 0 ){
-        const data = await fetchData() 
-        ACTIONS.updateProductList(data)
-      }
-      ACTIONS.unsetLoader()
-    })()
-  },[])    
+  componentDidMount(){    
+    const {products, setLoader, updateProductList, unsetLoader} = this.props
+    
+    if(Object.keys(products).length <= 0 ){
+      setLoader()
+      fetchData().then( data => {
+        updateProductList(data)
+        unsetLoader()
+      } )
+    }
 
-  return (
-    <LoaderHOC>
-      <div className='product-list'>
-          {
-              [...Object.keys(products)].map((id)=> <SingleItemCard key={id} itemId={id} /> )
-          }
-      </div>
-    </LoaderHOC>
-  )
+  }
+
+  render(){
+    const {products} = this.props
+    return (
+      <LoaderHOC>
+        <div className='product-list'>
+            {
+                [...Object.keys(products)].map((id)=> <SingleItemCard key={id} itemId={id} /> )
+            }
+        </div>
+      </LoaderHOC>
+    )
+    }
 }
 
-export default HomePage
+
+const mapStateToProps = (state) => {
+  return {
+    products : state.products,
+
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setLoader : () => dispatch(setLoaderAction()),
+    unsetLoader : () => dispatch(unsetLoaderAction()),
+    updateProductList : (data) => dispatch(updateProductListAction(data)), 
+  }
+}
+
+const HomePageContainer = connect(mapStateToProps,mapDispatchToProps)(HomePage)
+
+export default HomePageContainer
