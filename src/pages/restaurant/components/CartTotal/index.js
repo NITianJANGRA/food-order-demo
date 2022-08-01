@@ -34,7 +34,7 @@ const CartTotal = (props) => {
         const currentTotalAmount = parseInt(product.price) * order.orderQuantity
         totalAmount += currentTotalAmount
         return <AmountDetail key={order.itemId} itemName={product?.name} amount={currentTotalAmount} />                    
-    },[products])
+    },[products, cart])
 
   return (
     <div className='bill-container'>
