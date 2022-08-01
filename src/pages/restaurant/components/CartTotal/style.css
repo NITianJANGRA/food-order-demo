@@ -1,0 +1,29 @@
+.bill-container{
+    position: fixed;
+    width: 20rem;
+    background-color: var(--white);
+    border-radius: 1rem;
+    margin: 5rem auto;
+    box-shadow: 0 0 5px 2px #e1d6d6;
+}
+
+.price-row-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.5rem 1rem ;
+}
+.final-amount {
+    font-weight: 700;
+}
+.order-now{
+    position: absolute;
+    width: 100%;
+    bottom: -4rem;
+}
+@media only screen and (max-width: 850px) {
+    .bill-container{
+        position: relative;
+        width: max(20rem, 50vw);
+    }
+}
