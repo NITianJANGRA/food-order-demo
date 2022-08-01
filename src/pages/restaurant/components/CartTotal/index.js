@@ -29,12 +29,12 @@ const CartTotal = (props) => {
     let totalAmount = 0
     const {handleOrderNowClick} = props
 
-    const mapCartItems = useCallback((order)=>{
+    const mapCartItems = (order)=>{ 
         const product = products[order.itemId]
         const currentTotalAmount = parseInt(product.price) * order.orderQuantity
         totalAmount += currentTotalAmount
         return <AmountDetail key={order.itemId} itemName={product?.name} amount={currentTotalAmount} />                    
-    },[products, cart])
+    }
 
   return (
     <div className='bill-container'>
