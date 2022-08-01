@@ -8,7 +8,6 @@ import { CartCount } from '../../reducers/selectors/cart.selector';
 
 
 const NavBar = () => {
-  // const {state:{cart}} = useStore()
   const count =  useSelector(CartCount)
   return (
     <nav>

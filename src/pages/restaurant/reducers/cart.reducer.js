@@ -1,8 +1,6 @@
+import { ADD_TO_CART, ORDER_PLACED, REMOVE_FROM_CART } from "../actionTypes";
 import { addItemToCart, removeItemFromCart } from "./utils";
 
-export const ADD_TO_CART = 'ADD_TO_CART';
-export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
-export const ORDER_PLACED = 'ORDER_PLACED';
 
 const initialCartState = []
 

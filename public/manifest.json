@@ -8,20 +8,12 @@
       "type": "image/x-icon"
     },
     {
-<<<<<<< HEAD
-      "src": "logo192.png",
-=======
       "src": "images/logo.png",
->>>>>>> review-3
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-<<<<<<< HEAD
-      "src": "logo512.png",
-=======
       "src": "images/logo.png",
->>>>>>> review-3
       "type": "image/png",
       "sizes": "512x512"
     }

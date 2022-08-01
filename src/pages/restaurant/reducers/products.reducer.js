@@ -1,4 +1,4 @@
-export const UPDATE_PRODUCT_LIST = 'UPDATE_PRODUCT_LIST';
+import { UPDATE_PRODUCT_LIST } from "../actionTypes";
 
 const initialProductsState = {}
 

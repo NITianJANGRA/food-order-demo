@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import TextButton from '../buttons/TextButton';
 import CounterButton from '../buttons/CounterButton';
 import "./style.css";
@@ -12,16 +12,15 @@ const SingleItemCard = ({itemId}) => {
     const itemInCart = useSelector(ItemInCart(itemId))
     const ACTIONS = useActions()
 
-    const handleAddItemToCart = () => {
+    const handleAddItemToCart = useCallback(() => {
         ACTIONS.addItemToCart(itemId)
-    }
+    },[])
     
-    const handleRemoveItemFromCart = () => {
+    const handleRemoveItemFromCart = useCallback(() => {
         ACTIONS.removeItemFromCart(itemId)
-    }
+    },[])
 
   return (
-    item ?
         <div className='card-container'>
             <div className="card">
                 <div className="img-container">
@@ -46,7 +45,7 @@ const SingleItemCard = ({itemId}) => {
                     }
                 </div>
             </div>
-        </div> : null
+        </div> 
   )
 }
 

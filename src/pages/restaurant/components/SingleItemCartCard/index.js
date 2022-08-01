@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useSelector } from 'react-redux'
 import { useActions } from '../../action'
 import { ProductById } from '../../reducers/selectors/products.selector'
@@ -10,16 +10,15 @@ const SingleItemCartCard = ({order}) => {
     const ACTIONS = useActions()
     const item = useSelector(ProductById(order.itemId))
     
-    const handleAddItemToCart = () => {
+    const handleAddItemToCart = useCallback(() => {
         ACTIONS.addItemToCart(order.itemId)
-    }
+    },[])
 
-    const handleRemoveItemFromCart = () => {
+    const handleRemoveItemFromCart = useCallback(() => {
         ACTIONS.removeItemFromCart(order.itemId)
-    }
+    },[])
 
   return (
-    item ?
         <div className='order-container'>
             <div className="order-card">
                 <div className="order-img-container">
@@ -43,7 +42,7 @@ const SingleItemCartCard = ({order}) => {
                     </div>
                 </div>
             </div>
-        </div> : null
+        </div>
   )
 }
 

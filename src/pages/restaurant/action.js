@@ -1,7 +1,6 @@
+import { useMemo } from "react"
 import { useDispatch } from "react-redux"
-import { ADD_TO_CART, ORDER_PLACED, REMOVE_FROM_CART } from "./reducers/cart.reducer"
-import { SET_LOADER, UNSET_LOADER } from "./reducers/loading.reducer"
-import { UPDATE_PRODUCT_LIST } from "./reducers/products.reducer"
+import { ADD_TO_CART, ORDER_PLACED, REMOVE_FROM_CART, UPDATE_PRODUCT_LIST } from "./actionTypes"
 
 
 // created an abstract layer over functionality to update Store
@@ -21,18 +20,6 @@ export const removeItemFromCartAction = (itemId) => {
             payload:{
                 itemId
             }
-        }
-}
-
-export const setLoaderAction = ()=>{
-    return{
-            type: SET_LOADER
-        }
-}
-
-export const unsetLoaderAction = ()=>{
-    return{
-            type: UNSET_LOADER
         }
 }
 
@@ -60,14 +47,6 @@ export const useActions = () => {
         dispatch(removeItemFromCartAction(itemId))
     }
 
-    const setLoader = ()=>{
-        dispatch(setLoaderAction())
-    }
-
-    const unsetLoader = ()=>{
-        dispatch(unsetLoaderAction())
-    }
-
     const updateProductList = (data)=>{
         dispatch(updateProductListAction(data))
     }
@@ -75,13 +54,15 @@ export const useActions = () => {
     const orderPlaced = ()=>{
         dispatch(orderPlacedAction())
     }
-    return {
-        setLoader,
-        unsetLoader,
+
+    
+    const actions = {
         addItemToCart ,
         removeItemFromCart,
         updateProductList,
         orderPlaced
     }
+
+    return useMemo(()=> actions,[])
 }
 
