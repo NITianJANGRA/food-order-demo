@@ -7,7 +7,7 @@
 import { MIN_ORDER_QUANTITY } from "../actionTypes";
 
 const findCartItemByItemId = (cartItem,itemId) => cartItem.itemId === itemId;
-const excludeCartItemByItemId = (cartItem,itemId) => cartItem.itemId != itemId;
+const excludeCartItemByItemId = (cartItem,itemId) => cartItem.itemId !== itemId;
 
 const existingCartItem = (cartItems, itemIdToFind) => {
     return cartItems.find(cartItem => findCartItemByItemId(cartItem, itemIdToFind));

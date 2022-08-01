@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { setLoaderAction, unsetLoaderAction, updateProductListAction } from '../action';
+import { updateProductListAction } from '../action';
 import { Loader } from '../components/Loader';
 import SingleItemCard from '../components/singleItemCard';
 import { fetchData } from '../reducers/helper';
@@ -17,17 +17,22 @@ class HomePage extends React.Component {
     }
   }
 
-  componentDidMount(){    
-    const {products, updateProductList} = this.props
+  fetchProductDataCallBack = (data) => {
+    const {updateProductList} = this.props
+    updateProductList(data)
+    this.setState({...this.state, isLoading:false})
+  }
+
+  getProductData = ()=>{
+    const {products} = this.props
     
     if(Object.keys(products).length <= 0 ){
       this.setState({...this.state, isLoading:true})
-      fetchData().then( data => {
-        updateProductList(data)
-        this.setState({...this.state, isLoading:false})
-      } )
+      fetchData().then(this.fetchProductDataCallBack)
     }
-
+  }
+  componentDidMount(){    
+    this.getProductData()
   }
 
   render(){
