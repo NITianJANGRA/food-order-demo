@@ -123,12 +123,16 @@ export const menuItemsData = {
 };
 
 
-export const fetchData = () => new Promise( (resolve)=> setTimeout(()=>resolve(menuItemsData), 800)    )
-export const orderNow = () => new Promise( (resolve,reject)=> setTimeout(()=>{
+const fetchDataPromise = (resolve)=> setTimeout(()=>resolve(menuItemsData), 800)
+const promiseRandomAction = (resolve,reject)=>{
     const rand = Math.floor(Math.random() * 10)
     if(rand<=5){
         resolve(true)
     }else{
         reject(false)
     }
-}, 500)    )
+}
+const orderNowPromise  = (resolve,reject)=> setTimeout(()=>promiseRandomAction(resolve,reject) , 500)    
+
+export const fetchData = () => new Promise(fetchDataPromise)
+export const orderNow = () => new Promise(orderNowPromise)

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import TextButton from '../buttons/TextButton'
+import PropTypes from 'prop-types'
 import "./style.css"
 const MessageCard = (props) => {
   const {heading, link,  buttonText} = props
@@ -16,7 +17,10 @@ const MessageCard = (props) => {
   )
 }
 
-export default MessageCard
+MessageCard.propTypes = {
+  heading : PropTypes.string,
+  link : PropTypes.string,
+  buttonText : PropTypes.string
+}
 
-// 
-// "Add some item in cart"
+export default MessageCard

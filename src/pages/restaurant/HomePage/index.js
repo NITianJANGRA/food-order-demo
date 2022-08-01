@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { setLoaderAction, unsetLoaderAction, updateProductListAction } from '../action';
-import LoaderHOC from '../components/Loader';
+import { Loader } from '../components/Loader';
 import SingleItemCard from '../components/singleItemCard';
 import { fetchData } from '../reducers/helper';
 
@@ -10,14 +10,21 @@ import "./style.css";
 
 class HomePage extends React.Component {
 
+  constructor(props){
+    super(props)
+    this.state = {
+      isLoading : false,
+    }
+  }
+
   componentDidMount(){    
-    const {products, setLoader, updateProductList, unsetLoader} = this.props
+    const {products, updateProductList} = this.props
     
     if(Object.keys(products).length <= 0 ){
-      setLoader()
+      this.setState({...this.state, isLoading:true})
       fetchData().then( data => {
         updateProductList(data)
-        unsetLoader()
+        this.setState({...this.state, isLoading:false})
       } )
     }
 
@@ -26,13 +33,12 @@ class HomePage extends React.Component {
   render(){
     const {products} = this.props
     return (
-      <LoaderHOC>
+      this.state.isLoading ? <Loader /> :
         <div className='product-list'>
             {
                 [...Object.keys(products)].map((id)=> <SingleItemCard key={id} itemId={id} /> )
             }
         </div>
-      </LoaderHOC>
     )
     }
 }
@@ -47,8 +53,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setLoader : () => dispatch(setLoaderAction()),
-    unsetLoader : () => dispatch(unsetLoaderAction()),
     updateProductList : (data) => dispatch(updateProductListAction(data)), 
   }
 }
