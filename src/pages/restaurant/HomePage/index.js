@@ -52,13 +52,13 @@ class HomePage extends React.Component {
 const mapStateToProps = (state) => {
   return {
     products : state.products,
-
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
+  const updateProductList = data => dispatch(updateProductListAction(data))
   return {
-    updateProductList : (data) => dispatch(updateProductListAction(data)), 
+    updateProductList 
   }
 }
 

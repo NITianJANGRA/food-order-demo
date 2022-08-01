@@ -39,21 +39,13 @@ export const orderPlacedAction = ()=>{
 export const useActions = () => {
     const dispatch = useDispatch()
     
-    const addItemToCart = (itemId)=>{
-        dispatch(addItemToCartAction(itemId))
-    }
+    const addItemToCart = (itemId)=> dispatch(addItemToCartAction(itemId))
 
-    const removeItemFromCart = (itemId) => {
-        dispatch(removeItemFromCartAction(itemId))
-    }
+    const removeItemFromCart = (itemId) => dispatch(removeItemFromCartAction(itemId))
 
-    const updateProductList = (data)=>{
-        dispatch(updateProductListAction(data))
-    }
+    const updateProductList = (data)=> dispatch(updateProductListAction(data))
 
-    const orderPlaced = ()=>{
-        dispatch(orderPlacedAction())
-    }
+    const orderPlaced = ()=> dispatch(orderPlacedAction())
 
     
     const actions = {
@@ -63,6 +55,6 @@ export const useActions = () => {
         orderPlaced
     }
 
-    return useMemo(()=> actions,[])
+    return useMemo(()=> actions,[actions])
 }
 

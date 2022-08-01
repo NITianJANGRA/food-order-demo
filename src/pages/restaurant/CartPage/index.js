@@ -34,7 +34,7 @@ const CartPage = () => {
           navigate("/orderError")
       }
       updateLoadingState(false)
-  }, [])
+  }, [ACTIONS, updateLoadingState])
 
   return (
     isLoading ? <Loader /> :

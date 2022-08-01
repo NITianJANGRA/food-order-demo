@@ -12,11 +12,11 @@ const SingleItemCartCard = ({order}) => {
     
     const handleAddItemToCart = useCallback(() => {
         ACTIONS.addItemToCart(order.itemId)
-    },[])
+    },[ACTIONS, order])
 
     const handleRemoveItemFromCart = useCallback(() => {
         ACTIONS.removeItemFromCart(order.itemId)
-    },[])
+    },[ACTIONS, order])
 
   return (
         <div className='order-container'>

@@ -14,11 +14,11 @@ const SingleItemCard = ({itemId}) => {
 
     const handleAddItemToCart = useCallback(() => {
         ACTIONS.addItemToCart(itemId)
-    },[])
+    },[ACTIONS, itemId])
     
     const handleRemoveItemFromCart = useCallback(() => {
         ACTIONS.removeItemFromCart(itemId)
-    },[])
+    },[ACTIONS, itemId])
 
   return (
         <div className='card-container'>
