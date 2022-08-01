@@ -20,14 +20,14 @@ class HomePage extends React.Component {
   fetchProductDataCallBack = (data) => {
     const {updateProductList} = this.props
     updateProductList(data)
-    this.setState({...this.state, isLoading:false})
+    this.setState({ isLoading:false})
   }
 
   getProductData = ()=>{
     const {products} = this.props
     
     if(Object.keys(products).length <= 0 ){
-      this.setState({...this.state, isLoading:true})
+      this.setState({ isLoading:true})
       fetchData().then(this.fetchProductDataCallBack)
     }
   }
