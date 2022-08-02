@@ -1,8 +1,11 @@
 import React, { useCallback } from 'react'
 import { useSelector } from 'react-redux'
+import PropTypes from 'prop-types'
+
 import { useActions } from '../../action'
 import { ProductById } from '../../reducers/selectors/products.selector'
 import CounterButton from '../buttons/CounterButton'
+import { DEFAULT_PROP } from '../../constants/globalConstants'
 
 import "./style.css"
 
@@ -44,6 +47,14 @@ const SingleItemCartCard = ({order}) => {
             </div>
         </div>
   )
+}
+
+SingleItemCartCard.defaultProps = {
+    order : DEFAULT_PROP.object
+}
+
+SingleItemCartCard.propTypes = {
+    order : PropTypes.object
 }
 
 export default SingleItemCartCard

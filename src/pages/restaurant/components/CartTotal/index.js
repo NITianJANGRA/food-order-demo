@@ -1,10 +1,19 @@
-import React, { useCallback } from 'react'
+import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
+import PropTypes from 'prop-types'
+
 import { Products } from '../../reducers/selectors/products.selector'
 import { Cart } from '../../reducers/selectors/cart.selector'
 import FullWidthButton from '../buttons/FullWidthButton'
-import PropTypes from 'prop-types'
+import { DEFAULT_PROP } from '../../constants/globalConstants'
+
 import "./style.css"
+
+const getTotalAmount = (cartItem, productDetails) => cartItem.orderQuantity * parseInt(productDetails.price)
+
+const getCartTotalPrice = (cartList, productList) => cartList.reduce((total,cartItem) => total += getTotalAmount(cartItem, productList[cartItem.itemId]) ,0)
+
+const mapCartItems = (order,products)=> <AmountDetail key={order.itemId} itemName={products[order.itemId].name} amount={getTotalAmount(order, products[order.itemId])} />
 
 const AmountDetail = ({itemName, amount}) => {
     return (
@@ -15,31 +24,18 @@ const AmountDetail = ({itemName, amount}) => {
     )
 }
 
-AmountDetail.propTypes = {
-    itemName : PropTypes.string,
-    amount : PropTypes.number
-}
-
-
 const CartTotal = (props) => {
     
     const products = useSelector(Products)
     const cart = useSelector(Cart)
 
-    let totalAmount = 0
+    let totalAmount = useMemo(()=>getCartTotalPrice(cart,products),[cart,products])
     const {handleOrderNowClick} = props
-
-    const mapCartItems = (order)=>{ 
-        const product = products[order.itemId]
-        const currentTotalAmount = parseInt(product.price) * order.orderQuantity
-        totalAmount += currentTotalAmount
-        return <AmountDetail key={order.itemId} itemName={product?.name} amount={currentTotalAmount} />                    
-    }
 
   return (
     <div className='bill-container'>
         <div className="order-amount">
-            {cart.map(mapCartItems)}
+            {cart.map(order =>mapCartItems(order,products))}
         </div>
         <hr />
         <div className="final-amount">
@@ -51,6 +47,22 @@ const CartTotal = (props) => {
     </div>
   )
 }
+AmountDetail.defaultProps = {
+    itemName : DEFAULT_PROP.string,
+    amount : DEFAULT_PROP.int
+}
 
+AmountDetail.propTypes = {
+    itemName : PropTypes.string,
+    amount : PropTypes.number
+}
+
+CartTotal.defaultProps = {
+    handleOrderNowClick : DEFAULT_PROP.func
+}
+
+CartTotal.propTypes = {
+    handleOrderNowClick : PropTypes.func,
+}
 
 export default CartTotal

@@ -1,8 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import TextButton from '../buttons/TextButton'
 import PropTypes from 'prop-types'
+
+import TextButton from '../buttons/TextButton'
+import { DEFAULT_PROP } from '../../constants/globalConstants'
+
 import "./style.css"
+
 const MessageCard = (props) => {
   const {heading, link,  buttonText} = props
   return (
@@ -15,6 +19,12 @@ const MessageCard = (props) => {
       </div>
     </div>
   )
+}
+
+MessageCard.defaultProps = {
+  heading : DEFAULT_PROP.string,
+  link : DEFAULT_PROP.string,
+  buttonText : DEFAULT_PROP.string
 }
 
 MessageCard.propTypes = {

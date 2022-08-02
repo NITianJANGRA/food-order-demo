@@ -1,11 +1,11 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
 import {AiOutlineShoppingCart} from "react-icons/ai";
-
-import './style.css';
 import { useSelector } from 'react-redux';
+
 import { CartCount } from '../../reducers/selectors/cart.selector';
 
+import './style.css';
 
 const NavBar = () => {
   const count =  useSelector(CartCount)

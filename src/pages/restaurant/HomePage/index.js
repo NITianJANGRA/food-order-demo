@@ -1,9 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types'
 
-import { updateProductListAction } from '../action';
+import { getActions } from '../action';
 import { Loader } from '../components/Loader';
 import SingleItemCard from '../components/singleItemCard';
+import { DEFAULT_PROP, EMPTY_ARRAY_LENGTH } from '../constants/globalConstants';
 import { fetchData } from '../reducers/helper';
 
 import "./style.css";
@@ -26,7 +28,7 @@ class HomePage extends React.Component {
   getProductData = ()=>{
     const {products} = this.props
     
-    if(Object.keys(products).length <= 0 ){
+    if(Object.keys(products).length === EMPTY_ARRAY_LENGTH ){
       this.setState({ isLoading:true})
       fetchData().then(this.fetchProductDataCallBack)
     }
@@ -37,8 +39,9 @@ class HomePage extends React.Component {
 
   render(){
     const {products} = this.props
+    const {isLoading} = this.state
     return (
-      this.state.isLoading ? <Loader /> :
+      isLoading ? <Loader /> :
         <div className='product-list'>
             {
                 [...Object.keys(products)].map((id)=> <SingleItemCard key={id} itemId={id} /> )
@@ -51,17 +54,27 @@ class HomePage extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    products : state.products,
+    products : state?.products,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  const updateProductList = data => dispatch(updateProductListAction(data))
+  const ACTIONS = getActions(dispatch)
   return {
-    updateProductList 
+    updateProductList : ACTIONS.updateProductList
   }
 }
 
 const HomePageContainer = connect(mapStateToProps,mapDispatchToProps)(HomePage)
+
+HomePage.defaultProps = {
+  updateProductList : DEFAULT_PROP.func,
+  products : DEFAULT_PROP.object
+}
+
+HomePage.propTypes ={
+  updateProductList : PropTypes.func,
+  products : PropTypes.object
+}
 
 export default HomePageContainer

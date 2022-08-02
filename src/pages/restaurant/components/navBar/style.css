@@ -4,12 +4,12 @@ nav{
     justify-content: space-between;
     align-items: center;
     background-color: var(--white);
-    width: max(100vw, 320px);
-    height: max(10vh, 20px);
-    padding: 0 30px;
+    width: max(100vw, 20rem);
+    height: max(10vh, 1.25rem);
+    padding: 0 1.9rem;
     position: fixed;
     top: 0;
-    box-shadow: 0 0 5px 2px #e1d6d6;
+    box-shadow: 0 0 0.3rem 0.13rem #e1d6d6;
     z-index: 100;
 }
 

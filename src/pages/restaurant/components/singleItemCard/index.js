@@ -1,11 +1,15 @@
 import React, { useCallback } from 'react'
+import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types'
+
 import TextButton from '../buttons/TextButton';
 import CounterButton from '../buttons/CounterButton';
-import "./style.css";
-import { useSelector } from 'react-redux';
 import { ItemInCart } from '../../reducers/selectors/cart.selector';
 import { ProductById } from '../../reducers/selectors/products.selector';
 import { useActions } from '../../action';
+import { DEFAULT_PROP } from '../../constants/globalConstants';
+
+import "./style.css";
 
 const SingleItemCard = ({itemId}) => {
     const item = useSelector(ProductById(itemId))
@@ -47,6 +51,14 @@ const SingleItemCard = ({itemId}) => {
             </div>
         </div> 
   )
+}
+
+SingleItemCard.defaultProps = {
+    itemId : DEFAULT_PROP.string
+}
+
+SingleItemCard.propTypes = {
+    itemId : PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 }
 
 export default SingleItemCard

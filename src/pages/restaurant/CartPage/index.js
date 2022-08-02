@@ -1,15 +1,18 @@
 import React, { useCallback } from 'react'
 import CartTotal from '../components/CartTotal'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
 import MessageCard from '../components/MessageCard'
 import {Loader} from '../components/Loader'
 import SingleItemCartCard from '../components/SingleItemCartCard'
-import "./style.css"
-import { useSelector } from 'react-redux'
 import { Cart } from '../reducers/selectors/cart.selector'
 import { useLoading } from '../customHooks/loading'
 import { useActions } from '../action'
-import { useNavigate } from 'react-router-dom'
 import { orderNow } from '../reducers/helper'
+import { EMPTY_ARRAY_LENGTH } from '../constants/globalConstants'
+
+import "./style.css"
 const CartPage = () => {
   const cart = useSelector(Cart)
   const [isLoading, updateLoadingState] = useLoading()
@@ -39,7 +42,7 @@ const CartPage = () => {
   return (
     isLoading ? <Loader /> :
       <div className="cart-container">
-        {cart.length > 0 ?
+        {cart.length > EMPTY_ARRAY_LENGTH ?
           <React.Fragment>
             <section className="cart-item-list">
               {

@@ -1,10 +1,10 @@
+import { MIN_ORDER_QUANTITY } from "../constants/globalConstants";
 
 /*
     Used DRY(Don't Repeat Yourself) principle
     Used some concepts of functional programing
 */
 
-import { MIN_ORDER_QUANTITY } from "../actionTypes";
 
 const findCartItemByItemId = (cartItem,itemId) => cartItem.itemId === itemId;
 const excludeCartItemByItemId = (cartItem,itemId) => cartItem.itemId !== itemId;
@@ -41,3 +41,10 @@ export const removeItemFromCart = (cartItems, itemIdToRemove) => {
     }
     return updateOrderQuantity(cartItems, itemIdToRemove, decrement)
 };
+
+
+const reduceProductsArrayToObject = (acc , item) => {acc[item?.id] = item; return acc}
+
+export const addProductsData = (data)=>{
+    return data.reduce( reduceProductsArrayToObject, {} )
+}

@@ -1,6 +1,7 @@
 import { useMemo } from "react"
 import { useDispatch } from "react-redux"
-import { ADD_TO_CART, ORDER_PLACED, REMOVE_FROM_CART, UPDATE_PRODUCT_LIST } from "./actionTypes"
+
+import { ADD_TO_CART, ORDER_PLACED, REMOVE_FROM_CART, UPDATE_PRODUCT_LIST } from "./constants/actionTypes"
 
 
 // created an abstract layer over functionality to update Store
@@ -36,8 +37,8 @@ export const orderPlacedAction = ()=>{
         }
 }
 
-export const useActions = () => {
-    const dispatch = useDispatch()
+export const getActions = (dispatch) => {
+    
     
     const addItemToCart = (itemId)=> dispatch(addItemToCartAction(itemId))
 
@@ -48,13 +49,17 @@ export const useActions = () => {
     const orderPlaced = ()=> dispatch(orderPlacedAction())
 
     
-    const actions = {
+    return {
         addItemToCart ,
         removeItemFromCart,
         updateProductList,
         orderPlaced
     }
 
-    return useMemo(()=> actions,[actions])
+}
+
+export const useActions = ()=>{
+    const dispatch = useDispatch()
+    return useMemo(()=> getActions(dispatch),[dispatch] )
 }
 

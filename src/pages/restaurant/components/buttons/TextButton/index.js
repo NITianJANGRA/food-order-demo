@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 
+import { DEFAULT_PROP } from '../../../constants/globalConstants';
+
 import "./style.css"
 
 // Created a customizable component.
@@ -15,6 +17,13 @@ const TextButton = (props) => {
     <button className={`text-btn ${externalClass}`} type={type} onClick={onButtonClick} > {text}</button>
     
   )
+}
+
+TextButton.defaultProps = {
+  text : DEFAULT_PROP.string,
+  classes : DEFAULT_PROP.array,
+  type : DEFAULT_PROP.string,
+  onButtonClick : DEFAULT_PROP.func,
 }
 
 TextButton.propTypes = {

@@ -6,7 +6,7 @@
     margin: 1rem;
 }
 .card-container:hover {
-    box-shadow: 0 0 5px 2px #815858;
+    box-shadow: 0 0 0.3rem 0.13rem #815858;
 }
 
 .card{

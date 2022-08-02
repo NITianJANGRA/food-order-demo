@@ -1,7 +1,10 @@
 import React from 'react'
 import { AiFillCaretDown, AiFillCaretUp } from "react-icons/ai";
-import TextButton from '../TextButton';
 import PropTypes from "prop-types";
+
+import TextButton from '../TextButton';
+import { DEFAULT_PROP } from '../../../constants/globalConstants';
+
 import "./style.css"
 
 const CounterButton = (props) => {
@@ -13,6 +16,12 @@ const CounterButton = (props) => {
         <TextButton classes={["counter-btn"]} text={<AiFillCaretUp />} onButtonClick={handleIncrement} />
     </div>
   )
+}
+
+CounterButton.defaultProps = {
+  value : DEFAULT_PROP.int, 
+  handleIncrement : DEFAULT_PROP.func, 
+  handleDecrement : DEFAULT_PROP.func
 }
 
 CounterButton.propTypes = {

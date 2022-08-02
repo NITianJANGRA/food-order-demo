@@ -1,4 +1,4 @@
-import { ADD_TO_CART, ORDER_PLACED, REMOVE_FROM_CART } from "../actionTypes";
+import { ADD_TO_CART, ORDER_PLACED, REMOVE_FROM_CART } from "../constants/actionTypes";
 import { addItemToCart, removeItemFromCart } from "./utils";
 
 

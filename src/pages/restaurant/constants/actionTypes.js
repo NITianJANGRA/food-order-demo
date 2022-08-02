@@ -7,5 +7,4 @@ export const ORDER_PLACED = 'ORDER_PLACED';
 // products 
 export const UPDATE_PRODUCT_LIST = 'UPDATE_PRODUCT_LIST';
 
-// utils
-export const MIN_ORDER_QUANTITY = 1;
+
