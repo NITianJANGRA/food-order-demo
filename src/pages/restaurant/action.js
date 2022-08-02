@@ -37,23 +37,21 @@ export const orderPlacedAction = ()=>{
         }
 }
 
-export const getActions = (dispatch) => {
-    
-    
-    const addItemToCart = (itemId)=> dispatch(addItemToCartAction(itemId))
+export const addItemToCart = (dispatch) => (itemId)=> dispatch(addItemToCartAction(itemId))
 
-    const removeItemFromCart = (itemId) => dispatch(removeItemFromCartAction(itemId))
+export const removeItemFromCart = (dispatch) => (itemId) => dispatch(removeItemFromCartAction(itemId))
 
-    const updateProductList = (data)=> dispatch(updateProductListAction(data))
+export const updateProductList = (dispatch) => (data)=> dispatch(updateProductListAction(data))
 
-    const orderPlaced = ()=> dispatch(orderPlacedAction())
+export const orderPlaced = (dispatch) => ()=> dispatch(orderPlacedAction())
 
-    
+const getActions = (dispatch) => {
+
     return {
-        addItemToCart ,
-        removeItemFromCart,
-        updateProductList,
-        orderPlaced
+        addItemToCart : addItemToCart(dispatch)  ,
+        removeItemFromCart : removeItemFromCart(dispatch),
+        updateProductList : updateProductList(dispatch),
+        orderPlaced : orderPlaced(dispatch),
     }
 
 }

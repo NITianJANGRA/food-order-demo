@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
 
-import { getActions } from '../action';
+import { updateProductList } from '../action';
 import { Loader } from '../components/Loader';
 import SingleItemCard from '../components/singleItemCard';
 import { DEFAULT_PROP, EMPTY_ARRAY_LENGTH } from '../constants/globalConstants';
@@ -52,18 +52,9 @@ class HomePage extends React.Component {
 }
 
 
-const mapStateToProps = (state) => {
-  return {
-    products : state?.products,
-  }
-}
+const mapStateToProps = (state) => ({products : state?.products})
 
-const mapDispatchToProps = (dispatch) => {
-  const ACTIONS = getActions(dispatch)
-  return {
-    updateProductList : ACTIONS.updateProductList
-  }
-}
+const mapDispatchToProps = (dispatch) => ({updateProductList : updateProductList(dispatch)})
 
 const HomePageContainer = connect(mapStateToProps,mapDispatchToProps)(HomePage)
 
