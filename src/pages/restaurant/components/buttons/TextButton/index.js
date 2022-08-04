@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 
-import { DEFAULT_PROP } from '../../../constants/globalConstants';
+import { EMPTY_ARRAY, EMPTY_FUNCTION, EMPTY_STRING } from '../../../constants/globalConstants';
 
 import "./style.css"
 
@@ -10,20 +10,20 @@ import "./style.css"
 // used as building block for CounterButton 
 
 const TextButton = (props) => {
-    const { text, classes, type, onButtonClick} = props
+    const { text, classes, type, onClick} = props
     const externalClass = classes.join(' ')
   return (
     
-    <button className={`text-btn ${externalClass}`} type={type} onClick={onButtonClick} > {text}</button>
+    <button className={`text-btn ${externalClass}`} type={type} onClick={onClick} > {text}</button>
     
   )
 }
 
 TextButton.defaultProps = {
-  text : DEFAULT_PROP.string,
-  classes : DEFAULT_PROP.array,
-  type : DEFAULT_PROP.string,
-  onButtonClick : DEFAULT_PROP.func,
+  text : EMPTY_STRING,
+  classes : EMPTY_ARRAY,
+  type : EMPTY_STRING,
+  onButtonClick : EMPTY_FUNCTION,
 }
 
 TextButton.propTypes = {

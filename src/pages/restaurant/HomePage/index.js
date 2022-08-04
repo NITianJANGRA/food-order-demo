@@ -2,14 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
 
-import { updateProductList } from '../action';
+import { updateProductListAction } from '../action';
 import { Loader } from '../components/Loader';
 import SingleItemCard from '../components/singleItemCard';
-import { DEFAULT_PROP, EMPTY_ARRAY_LENGTH } from '../constants/globalConstants';
-import { fetchData } from '../reducers/helper';
+import { EMPTY_ARRAY_LENGTH, EMPTY_FUNCTION, EMPTY_OBJECT } from '../constants/globalConstants';
+import { fetchData } from '../fakeApiHelper';
 
 import "./style.css";
 
+const mapSingleCartItem = (id)=> <SingleItemCard key={id} itemId={id} />
 class HomePage extends React.Component {
 
   constructor(props){
@@ -18,10 +19,9 @@ class HomePage extends React.Component {
       isLoading : false,
     }
   }
-
   fetchProductDataCallBack = (data) => {
-    const {updateProductList} = this.props
-    updateProductList(data)
+    const {updateProductListAction} = this.props
+    updateProductListAction(data)
     this.setState({ isLoading:false})
   }
 
@@ -44,7 +44,7 @@ class HomePage extends React.Component {
       isLoading ? <Loader /> :
         <div className='product-list'>
             {
-                [...Object.keys(products)].map((id)=> <SingleItemCard key={id} itemId={id} /> )
+                [...Object.keys(products)].map(mapSingleCartItem)
             }
         </div>
     )
@@ -54,17 +54,17 @@ class HomePage extends React.Component {
 
 const mapStateToProps = (state) => ({products : state?.products})
 
-const mapDispatchToProps = (dispatch) => ({updateProductList : updateProductList(dispatch)})
+const mapDispatchToProps = {updateProductListAction}
 
 const HomePageContainer = connect(mapStateToProps,mapDispatchToProps)(HomePage)
 
 HomePage.defaultProps = {
-  updateProductList : DEFAULT_PROP.func,
-  products : DEFAULT_PROP.object
+  updateProductListAction : EMPTY_FUNCTION,
+  products : EMPTY_OBJECT
 }
 
 HomePage.propTypes ={
-  updateProductList : PropTypes.func,
+  updateProductListAction : PropTypes.func,
   products : PropTypes.object
 }
 

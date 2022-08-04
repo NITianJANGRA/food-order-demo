@@ -1,25 +1,25 @@
 import React, { useCallback } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector,connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { useActions } from '../../action'
+import { addItemToCartAction, removeItemFromCartAction } from '../../action'
 import { ProductById } from '../../reducers/selectors/products.selector'
 import CounterButton from '../buttons/CounterButton'
-import { DEFAULT_PROP } from '../../constants/globalConstants'
+import { EMPTY_OBJECT } from '../../constants/globalConstants'
 
 import "./style.css"
 
-const SingleItemCartCard = ({order}) => {
-    const ACTIONS = useActions()
+const SingleItemCartCard = (props) => {
+    const {order,addItemToCartAction, removeItemFromCartAction} = props
     const item = useSelector(ProductById(order.itemId))
     
     const handleAddItemToCart = useCallback(() => {
-        ACTIONS.addItemToCart(order.itemId)
-    },[ACTIONS, order])
+        addItemToCartAction(order.itemId)
+    },[addItemToCartAction, order])
 
     const handleRemoveItemFromCart = useCallback(() => {
-        ACTIONS.removeItemFromCart(order.itemId)
-    },[ACTIONS, order])
+        removeItemFromCartAction(order.itemId)
+    },[removeItemFromCartAction, order])
 
   return (
         <div className='order-container'>
@@ -50,11 +50,16 @@ const SingleItemCartCard = ({order}) => {
 }
 
 SingleItemCartCard.defaultProps = {
-    order : DEFAULT_PROP.object
+    order : EMPTY_OBJECT
 }
 
 SingleItemCartCard.propTypes = {
     order : PropTypes.object
 }
 
-export default SingleItemCartCard
+const mapDispatchToProps = {
+    addItemToCartAction,
+    removeItemFromCartAction
+}
+
+export default connect(null,mapDispatchToProps)(SingleItemCartCard)

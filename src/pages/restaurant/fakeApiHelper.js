@@ -1,6 +1,6 @@
 
 
-export const menuItemsData = [
+export const MENU_ITEM_DATA = [
     {       
         id : 1,
         name: 'Mediterranean  Salad',
@@ -140,7 +140,7 @@ export const menuItemsData = [
 ]
 
 
-const fetchDataPromise = (resolve)=> setTimeout(()=>resolve(menuItemsData), 800)
+const fetchDataPromise = (resolve)=> setTimeout(()=>resolve(MENU_ITEM_DATA), 800)
 const promiseRandomAction = (resolve,reject)=>{
     const rand = Math.floor(Math.random() * 10)
     if(rand<=5){

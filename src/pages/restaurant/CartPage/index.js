@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import CartTotal from '../components/CartTotal'
-import { useSelector } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import MessageCard from '../components/MessageCard'
@@ -8,25 +8,27 @@ import {Loader} from '../components/Loader'
 import SingleItemCartCard from '../components/SingleItemCartCard'
 import { Cart } from '../reducers/selectors/cart.selector'
 import { useLoading } from '../customHooks/loading'
-import { useActions } from '../action'
-import { orderNow } from '../reducers/helper'
+import { orderPlacedAction } from '../action'
+import { orderNow } from '../fakeApiHelper'
 import { EMPTY_ARRAY_LENGTH } from '../constants/globalConstants'
 
 import "./style.css"
-const CartPage = () => {
+
+const renderSingleItemCartCard = order => <SingleItemCartCard key={order?.itemId} order={order} />
+
+const CartPage = (props) => {
   const cart = useSelector(Cart)
   const [isLoading, updateLoadingState] = useLoading()
-  const ACTIONS = useActions()
   const navigate = useNavigate()
   
-  const renderSingleItemCartCard = order => <SingleItemCartCard key={order?.itemId} order={order} />
+  const {orderPlacedAction}=props
   
   const handleOrderNowClick = useCallback( async()=>{
       updateLoadingState(true)
       try{
           const status = await orderNow()
           if(status){
-              ACTIONS.orderPlaced()
+            orderPlacedAction()
               navigate("/orderSuccess")
           }else{
               navigate("/orderError")
@@ -37,7 +39,7 @@ const CartPage = () => {
           navigate("/orderError")
       }
       updateLoadingState(false)
-  }, [ACTIONS, updateLoadingState])
+  }, [orderPlacedAction, navigate, updateLoadingState])
 
   return (
     isLoading ? <Loader /> :
@@ -50,11 +52,15 @@ const CartPage = () => {
               }
             </section>
             <aside className="cart-bill-container">        
-              <CartTotal handleOrderNowClick={handleOrderNowClick} />
+              <CartTotal onClick={handleOrderNowClick} />
             </aside>
           </React.Fragment> : <MessageCard heading={`No item in cart.`} link={`/`} buttonText={`Add some item in cart`} /> }
       </div>
   )
 }
 
-export default CartPage
+const mapDisspatchToProps ={
+  orderPlacedAction
+}
+
+export default connect(null,mapDisspatchToProps)(CartPage)

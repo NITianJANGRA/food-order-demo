@@ -1,28 +1,29 @@
 import React, { useCallback } from 'react'
-import { useSelector } from 'react-redux';
+import { useSelector, connect } from 'react-redux';
 import PropTypes from 'prop-types'
+
 
 import TextButton from '../buttons/TextButton';
 import CounterButton from '../buttons/CounterButton';
 import { ItemInCart } from '../../reducers/selectors/cart.selector';
 import { ProductById } from '../../reducers/selectors/products.selector';
-import { useActions } from '../../action';
-import { DEFAULT_PROP } from '../../constants/globalConstants';
+import { addItemToCartAction, removeItemFromCartAction } from '../../action';
+import { EMPTY_STRING } from '../../constants/globalConstants';
 
 import "./style.css";
 
-const SingleItemCard = ({itemId}) => {
+const SingleItemCard = (props) => {
+    const {itemId, addItemToCartAction, removeItemFromCartAction} = props
     const item = useSelector(ProductById(itemId))
     const itemInCart = useSelector(ItemInCart(itemId))
-    const ACTIONS = useActions()
 
     const handleAddItemToCart = useCallback(() => {
-        ACTIONS.addItemToCart(itemId)
-    },[ACTIONS, itemId])
+        addItemToCartAction(itemId)
+    },[addItemToCartAction, itemId])
     
     const handleRemoveItemFromCart = useCallback(() => {
-        ACTIONS.removeItemFromCart(itemId)
-    },[ACTIONS, itemId])
+        removeItemFromCartAction(itemId)
+    },[removeItemFromCartAction, itemId])
 
   return (
         <div className='card-container'>
@@ -45,7 +46,7 @@ const SingleItemCard = ({itemId}) => {
                         itemInCart ? 
                         <CounterButton value={itemInCart.orderQuantity} handleIncrement={handleAddItemToCart} handleDecrement={handleRemoveItemFromCart} />
                         : 
-                        <TextButton type='button' classes={["card-button"]} text="+ Add to Cart" onButtonClick={handleAddItemToCart}  />
+                        <TextButton type='button' classes={["card-button"]} text="+ Add to Cart" onClick={handleAddItemToCart}  />
                     }
                 </div>
             </div>
@@ -54,11 +55,16 @@ const SingleItemCard = ({itemId}) => {
 }
 
 SingleItemCard.defaultProps = {
-    itemId : DEFAULT_PROP.string
+    itemId : EMPTY_STRING
 }
 
 SingleItemCard.propTypes = {
     itemId : PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 }
 
-export default SingleItemCard
+const mapDispatchToProps = {
+    addItemToCartAction,
+    removeItemFromCartAction
+}
+
+export default connect(null,mapDispatchToProps)(SingleItemCard)

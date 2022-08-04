@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import TextButton from '../buttons/TextButton'
-import { DEFAULT_PROP } from '../../constants/globalConstants'
+import { EMPTY_STRING } from '../../constants/globalConstants'
 
 import "./style.css"
 
@@ -22,9 +22,9 @@ const MessageCard = (props) => {
 }
 
 MessageCard.defaultProps = {
-  heading : DEFAULT_PROP.string,
-  link : DEFAULT_PROP.string,
-  buttonText : DEFAULT_PROP.string
+  heading : EMPTY_STRING,
+  link : EMPTY_STRING,
+  buttonText : EMPTY_STRING
 }
 
 MessageCard.propTypes = {
