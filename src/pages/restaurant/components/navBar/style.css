@@ -1,0 +1,35 @@
+nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--white);
+    width: max(100vw, 20rem);
+    height: max(10vh, 1.25rem);
+    padding: 0 1.9rem;
+    position: fixed;
+    top: 0;
+    box-shadow: 0 0 0.3rem 0.13rem #e1d6d6;
+    z-index: 100;
+}
+
+.logo{
+    width: 3rem;
+}
+
+.cart-link{
+    position: relative;
+    font-size: 2rem;
+}
+
+.order-count{
+    position: absolute;
+    top: -0.5rem;
+    right: -0.5rem;
+    font-size: 1rem;
+    background: red;
+    width: 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    color: white;
+}

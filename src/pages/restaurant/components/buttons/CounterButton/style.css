@@ -1,0 +1,15 @@
+.counter-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-shadow: 0 0 0.3rem 0.13rem #e1d6d6;
+}
+
+.counter-btn{
+    padding-top: 0.3rem;
+    font-size: 1rem;
+}
+
+.vertical-partition{
+    height: 2rem
+}
