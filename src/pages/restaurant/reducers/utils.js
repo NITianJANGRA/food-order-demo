@@ -7,7 +7,7 @@ import { MIN_ORDER_QUANTITY } from "../constants/globalConstants";
 
 
 const findCartItemByItemId = (cartItem,itemId) => cartItem.itemId === itemId;
-const excludeCartItemByItemId = (cartItem,itemId) => cartItem.itemId !== itemId;
+const excludeCartItemByItemId = (itemId) =>(cartItem) => cartItem.itemId !== itemId;
 
 const existingCartItem = (cartItems, itemIdToFind) => {
     return cartItems.find(cartItem => findCartItemByItemId(cartItem, itemIdToFind));
@@ -37,7 +37,7 @@ export const addItemToCart = (cartItems, itemIdToAdd) => {
 export const removeItemFromCart = (cartItems, itemIdToRemove) => {
     const existingItem = existingCartItem(cartItems,itemIdToRemove);
     if (existingItem?.orderQuantity === MIN_ORDER_QUANTITY) {
-        return cartItems.filter((cartItem) => excludeCartItemByItemId(cartItem,itemIdToRemove));
+        return cartItems.filter(excludeCartItemByItemId(itemIdToRemove));
     }
     return updateOrderQuantity(cartItems, itemIdToRemove, decrement)
 };
